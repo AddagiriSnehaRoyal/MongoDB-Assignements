@@ -46,3 +46,24 @@ Schema validation used with:
 - $pull → remove skill
 - $addToSet → avoid duplicate skill
 - replaceOne() → replace full notice document
+
+## Assignment 3 – Queries & Administration
+
+### Operators Used:
+- Comparison: $eq, $gt, $in
+- Logical: $and, $or
+- Element: $exists, $type
+- Evaluation: $regex, $expr
+- Array: $size, $all, $elemMatch
+
+### Aggregation:
+- $match, $group, $project, $sort, $skip, $limit, $unwind
+
+### Indexing:
+- createIndex(), getIndexes(), dropIndex()
+
+### Backup:
+- mongodump used to create backup
+
+### Atlas:
+- MongoDB Compass connected to MongoDB Atlas cluster
