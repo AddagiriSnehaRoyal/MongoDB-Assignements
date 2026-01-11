@@ -390,3 +390,149 @@ db.notices.replaceOne(
     isActive: true
   }
 )
+
+
+use college_db
+
+1. Comparison Operators
+
+$eq, $ne – students active/inactive
+db.students.find({ isActive: { $eq: true } })
+db.students.find({ isActive: { $ne: true } })
+
+$gt, $gte, $lt, $lte – course fee range
+db.courses.find({ fee: { $gt: 50000 } })
+db.courses.find({ fee: { $gte: 50000, $lte: 100000 } })
+
+$in, $nin – admissions by status
+db.admissions.find({ status: { $in: ["approved", "pending"] } })
+db.admissions.find({ status: { $nin: ["rejected"] } })
+
+
+2. Logical Operators
+
+$and
+db.students.find({
+  $and: [
+    { isActive: true },
+    { studentId: { $gt: 102 } }
+  ]
+})
+
+$or
+db.admissions.find({
+  $or: [
+    { status: "approved" },
+    { status: "pending" }
+  ]
+})
+
+$not
+db.courses.find({ fee: { $not: { $gt: 100000 } } })
+
+$nor
+db.students.find({
+  $nor: [
+    { studentId: 101 },
+    { studentId: 102 }
+  ]
+})
+
+3. Element Operators
+
+$exists
+db.career_domains.find({ description: { $exists: true } })
+
+$type
+db.students.find({ dateOfBirth: { $type: "date" } })
+
+
+4. Evaluation Operators
+
+$regex – pattern search
+db.students.find({ name: { $regex: "^A", $options: "i" } })
+
+$expr – compare fields
+db.courses.find({
+  $expr: { $gt: ["$fee", 60000] }
+})
+
+5. Array Operators
+
+$size
+db.career_requests.find({ skills: { $size: 1 } })
+
+$all
+db.career_requests.find({ skills: { $all: ["CSS", "JavaScript"] } })
+
+$elemMatch
+db.career_requests.find({
+  skills: { $elemMatch: { $eq: "Python" } }
+})
+
+
+
+2. AGGREGATION PIPELINE
+
+Total admissions per course:
+db.admissions.aggregate([
+  { $group: { _id: "$courseId", totalAdmissions: { $sum: 1 } } }
+])
+
+
+Student count by admission status:
+db.admissions.aggregate([
+  { $group: { _id: "$status", count: { $sum: 1 } } }
+])
+
+Most requested career domains:
+db.career_requests.aggregate([
+  { $group: { _id: "$domainId", requests: { $sum: 1 } } },
+  { $sort: { requests: -1 } }
+])
+
+Event registration counts:
+db.event_registrations.aggregate([
+  { $group: { _id: "$eventId", total: { $sum: 1 } } }
+])
+
+Pagination report
+db.students.aggregate([
+  { $project: { studentId: 1, name: 1, _id: 0 } },
+  { $skip: 0 },
+  { $limit: 3 }
+])
+
+$unwind example
+db.career_requests.aggregate([
+  { $unwind: "$skills" },
+  { $group: { _id: "$skills", count: { $sum: 1 } } }
+])
+
+Create indexes
+db.students.createIndex({ studentId: 1 })
+db.admissions.createIndex({ status: 1 })
+
+View indexes
+db.students.getIndexes()
+
+
+Drop index
+db.students.dropIndex("studentId_1")
+
+
+
+3. SORTING & PAGINATION:
+
+Sort by name
+db.students.find().sort({ name: 1 })
+
+Pagination
+db.students.find().skip(2).limit(2)
+
+4. COUNTING:
+db.students.countDocuments({ isActive: true })
+db.students.estimatedDocumentCount()
+
+
+
