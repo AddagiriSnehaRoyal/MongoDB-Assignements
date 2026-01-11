@@ -185,3 +185,208 @@ events
 notices
 students
 
+
+use college_db
+
+students (insertMany):
+
+db.students.insertMany([
+{
+  studentId: 101,
+  name: "Sneha",
+  email: "sneha@gmail.com",
+  mobile: "9876543210",
+  dateOfBirth: ISODate("2002-05-12"),
+  isActive: true,
+  createdAt: ISODate()
+},
+{
+  studentId: 102,
+  name: "Rahul",
+  email: "rahul@gmail.com",
+  mobile: "9123456780",
+  dateOfBirth: ISODate("2001-08-10"),
+  isActive: true,
+  createdAt: ISODate()
+},
+{
+  studentId: 103,
+  name: "Anita",
+  email: "anita@gmail.com",
+  mobile: "9988776655",
+  dateOfBirth: ISODate("2000-11-20"),
+  isActive: true,
+  createdAt: ISODate()
+},
+{
+  studentId: 104,
+  name: "Kiran",
+  email: "kiran@gmail.com",
+  mobile: "8899776655",
+  dateOfBirth: ISODate("2002-01-15"),
+  isActive: true,
+  createdAt: ISODate()
+},
+{
+  studentId: 105,
+  name: "Aman",
+  email: "aman@gmail.com",
+  mobile: "7766554433",
+  dateOfBirth: ISODate("2001-06-25"),
+  isActive: true,
+  createdAt: ISODate()
+}
+])
+
+
+courses:
+
+db.courses.insertMany([
+{ courseId: "C101", courseName: "BCA", duration: "3 Years", fee: 50000, isAvailable: true },
+{ courseId: "C102", courseName: "BSc CS", duration: "3 Years", fee: 60000, isAvailable: true },
+{ courseId: "C103", courseName: "MBA", duration: "2 Years", fee: 120000, isAvailable: true },
+{ courseId: "C104", courseName: "MCA", duration: "2 Years", fee: 100000, isAvailable: true },
+{ courseId: "C105", courseName: "BCom", duration: "3 Years", fee: 40000, isAvailable: true }
+])
+
+
+admissions:
+
+db.admissions.insertMany([
+{ applicationId: 1, studentId: 101, courseId: "C101", status: "pending", appliedDate: ISODate() },
+{ applicationId: 2, studentId: 102, courseId: "C102", status: "approved", appliedDate: ISODate() },
+{ applicationId: 3, studentId: 103, courseId: "C103", status: "rejected", appliedDate: ISODate() },
+{ applicationId: 4, studentId: 104, courseId: "C104", status: "pending", appliedDate: ISODate() },
+{ applicationId: 5, studentId: 105, courseId: "C105", status: "approved", appliedDate: ISODate() }
+])
+
+
+admission_enquiries:
+
+db.admission_enquiries.insertMany([
+{ enquiryId: 1, studentName: "Ravi", email: "ravi@gmail.com", message: "Course fee?", createdAt: ISODate() },
+{ enquiryId: 2, studentName: "Meena", email: "meena@gmail.com", message: "Hostel available?", createdAt: ISODate() },
+{ enquiryId: 3, studentName: "Raj", email: "raj@gmail.com", message: "Scholarship?", createdAt: ISODate() },
+{ enquiryId: 4, studentName: "Pooja", email: "pooja@gmail.com", message: "Entrance exam?", createdAt: ISODate() },
+{ enquiryId: 5, studentName: "Karthik", email: "karthik@gmail.com", message: "Eligibility?", createdAt: ISODate() }
+])
+
+
+career_domains:
+
+db.career_domains.insertMany([
+{ domainId: "D1", domainName: "Web Development", description: "Frontend & Backend", isActive: true },
+{ domainId: "D2", domainName: "Data Science", description: "ML & AI", isActive: true },
+{ domainId: "D3", domainName: "Cyber Security", description: "Ethical Hacking", isActive: true },
+{ domainId: "D4", domainName: "Cloud Computing", description: "AWS & Azure", isActive: true },
+{ domainId: "D5", domainName: "UI/UX", description: "Design Thinking", isActive: true }
+])
+
+counselors:
+
+db.counselors.insertMany([
+{ counselorId: 1, name: "Dr Rao", email: "rao@gmail.com", specialization: "AI", experienceYears: 10 },
+{ counselorId: 2, name: "Ms Devi", email: "devi@gmail.com", specialization: "Web", experienceYears: 6 },
+{ counselorId: 3, name: "Mr Kumar", email: "kumar@gmail.com", specialization: "Security", experienceYears: 8 },
+{ counselorId: 4, name: "Mrs Anu", email: "anu@gmail.com", specialization: "Cloud", experienceYears: 7 },
+{ counselorId: 5, name: "Mr John", email: "john@gmail.com", specialization: "UI/UX", experienceYears: 5 }
+])
+
+career_requests:
+
+db.career_requests.insertMany([
+{ requestId: 1, studentId: 101, domainId: "D1", skills: ["HTML"], status: "requested", requestedAt: ISODate() },
+{ requestId: 2, studentId: 102, domainId: "D2", skills: ["Python"], status: "in_progress", requestedAt: ISODate() },
+{ requestId: 3, studentId: 103, domainId: "D3", skills: ["Networking"], status: "requested", requestedAt: ISODate() },
+{ requestId: 4, studentId: 104, domainId: "D4", skills: ["Linux"], status: "completed", requestedAt: ISODate() },
+{ requestId: 5, studentId: 105, domainId: "D5", skills: ["Figma"], status: "requested", requestedAt: ISODate() }
+])
+
+events:
+
+db.events.insertMany([
+{ eventId: "E1", eventName: "Tech Fest", eventDate: ISODate("2024-12-01"), location: "Auditorium", status: "upcoming" },
+{ eventId: "E2", eventName: "Workshop", eventDate: ISODate("2024-11-01"), location: "Lab", status: "completed" },
+{ eventId: "E3", eventName: "Seminar", eventDate: ISODate("2024-10-10"), location: "Hall", status: "completed" },
+{ eventId: "E4", eventName: "Hackathon", eventDate: ISODate("2024-12-15"), location: "Block A", status: "upcoming" },
+{ eventId: "E5", eventName: "Orientation", eventDate: ISODate("2024-09-01"), location: "Conference Room", status: "completed" }
+])
+
+
+event_registrations:
+
+db.event_registrations.insertMany([
+{ registrationId: 1, eventId: "E1", studentId: 101, registeredAt: ISODate() },
+{ registrationId: 2, eventId: "E2", studentId: 102, registeredAt: ISODate() },
+{ registrationId: 3, eventId: "E3", studentId: 103, registeredAt: ISODate() },
+{ registrationId: 4, eventId: "E4", studentId: 104, registeredAt: ISODate() },
+{ registrationId: 5, eventId: "E5", studentId: 105, registeredAt: ISODate() }
+])
+
+
+notices:
+
+db.notices.insertMany([
+{ noticeId: 1, title: "Holiday", content: "College closed tomorrow", publishedDate: ISODate(), isActive: true },
+{ noticeId: 2, title: "Exam", content: "Internal exams next week", publishedDate: ISODate(), isActive: true },
+{ noticeId: 3, title: "Fees", content: "Pay before 30th", publishedDate: ISODate(), isActive: true },
+{ noticeId: 4, title: "Event", content: "Join Tech Fest", publishedDate: ISODate(), isActive: true },
+{ noticeId: 5, title: "Result", content: "Results declared", publishedDate: ISODate(), isActive: false }
+])
+
+
+
+UPDATE OPERATIONS:
+
+1. Update student mobile using $set:
+db.students.updateOne(
+  { studentId: 101 },
+  { $set: { mobile: "9999999999" } }
+)
+
+2. Modify admission status:
+db.admissions.updateOne(
+  { applicationId: 1 },
+  { $set: { status: "approved" } }
+)
+
+
+3. Add new skill using $push:
+db.career_requests.updateOne(
+  { requestId: 1 },
+  { $push: { skills: "CSS" } }
+)
+
+
+4. Remove skill using $pull:
+db.career_requests.updateOne(
+  { requestId: 1 },
+  { $pull: { skills: "HTML" } }
+)
+
+
+5. Prevent duplicate using $addToSet:
+db.career_requests.updateOne(
+  { requestId: 1 },
+  { $addToSet: { skills: "JavaScript" } }
+)
+
+
+6. Update event status:
+db.events.updateOne(
+  { eventId: "E1" },
+  { $set: { status: "completed" } }
+)
+
+
+7. replaceOne:
+db.notices.replaceOne(
+  { noticeId: 5 },
+  {
+    noticeId: 5,
+    title: "Updated Notice",
+    content: "Notice content updated fully",
+    publishedDate: ISODate(),
+    isActive: true
+  }
+)

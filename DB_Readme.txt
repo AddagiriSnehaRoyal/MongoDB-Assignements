@@ -32,3 +32,17 @@ Schema validation used with:
 - enum
 - minimum
 - regex pattern
+
+## Assignment 2 – Data Insertion and Updates
+
+### Insert Operations Used:
+- insertMany() used for all collections
+- ISODate() used for date fields
+- Arrays used in career_requests.skills
+
+### Update Operators Used:
+- $set → update student mobile and admission status
+- $push → add new skill
+- $pull → remove skill
+- $addToSet → avoid duplicate skill
+- replaceOne() → replace full notice document
