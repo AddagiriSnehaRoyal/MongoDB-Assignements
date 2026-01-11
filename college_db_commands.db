@@ -1,0 +1,187 @@
+test> use college_db
+switched to db college_db
+
+1. Student Admission Information Portal
+
+Collection: students
+db.createCollection("students", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["studentId", "name", "email", "mobile", "dateOfBirth", "createdAt"],
+      properties: {
+        studentId: { bsonType: "number" },
+        name: { bsonType: "string" },
+        email: { 
+          bsonType: "string",
+          pattern: "^\\S+@\\S+\\.\\S+$"
+        },
+        mobile: { 
+          bsonType: "string",
+          minLength: 10,
+          maxLength: 10
+        },
+        dateOfBirth: { bsonType: "date" },
+        isActive: { bsonType: "bool" },
+        createdAt: { bsonType: "date" }
+      }
+    }
+  }
+})
+
+Collection: courses
+db.createCollection("courses", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["courseId", "courseName", "duration", "fee", "isAvailable"],
+      properties: {
+        courseId: { bsonType: "string" },
+        courseName: { bsonType: "string" },
+        duration: { bsonType: "string" },
+        fee: { bsonType: "number", minimum: 1 },
+        isAvailable: { bsonType: "bool" }
+      }
+    }
+  }
+})
+
+Collection: admissions
+db.createCollection("admissions", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["applicationId", "studentId", "courseId", "status", "appliedDate"],
+      properties: {
+        applicationId: { bsonType: "number" },
+        studentId: { bsonType: "number" },
+        courseId: { bsonType: "string" },
+        status: { enum: ["pending", "approved", "rejected"] },
+        appliedDate: { bsonType: "date" }
+      }
+    }
+  }
+})
+
+2. Student Career Guidance and Counseling Portal
+
+Collection: career_domains
+db.createCollection("career_domains", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["domainId", "domainName", "isActive"],
+      properties: {
+        domainId: { bsonType: "string" },
+        domainName: { bsonType: "string" },
+        description: { bsonType: "string" },
+        isActive: { bsonType: "bool" }
+      }
+    }
+  }
+})
+
+Collection: counselors
+db.createCollection("counselors", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["counselorId", "name", "email", "specialization", "experienceYears"],
+      properties: {
+        counselorId: { bsonType: "number" },
+        name: { bsonType: "string" },
+        email: { bsonType: "string" },
+        specialization: { bsonType: "string" },
+        experienceYears: { bsonType: "number", minimum: 1 }
+      }
+    }
+  }
+})
+
+Collection: career_requests
+db.createCollection("career_requests", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["requestId", "studentId", "domainId", "status", "requestedAt"],
+      properties: {
+        requestId: { bsonType: "number" },
+        studentId: { bsonType: "number" },
+        domainId: { bsonType: "string" },
+        skills: {
+          bsonType: "array",
+          items: { bsonType: "string" }
+        },
+        status: { enum: ["requested", "in_progress", "completed"] },
+        requestedAt: { bsonType: "date" }
+      }
+    }
+  }
+})
+
+
+3. Academic Events and Notice Board
+
+Collection: events
+db.createCollection("events", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["eventId", "eventName", "eventDate", "location", "status"],
+      properties: {
+        eventId: { bsonType: "string" },
+        eventName: { bsonType: "string" },
+        eventDate: { bsonType: "date" },
+        location: { bsonType: "string" },
+        status: { enum: ["upcoming", "completed", "cancelled"] }
+      }
+    }
+  }
+})
+
+Collection: event_registrations
+db.createCollection("event_registrations", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["registrationId", "eventId", "studentId", "registeredAt"],
+      properties: {
+        registrationId: { bsonType: "number" },
+        eventId: { bsonType: "string" },
+        studentId: { bsonType: "number" },
+        registeredAt: { bsonType: "date" }
+      }
+    }
+  }
+})
+
+Collection: notices
+db.createCollection("notices", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["noticeId", "title", "content", "publishedDate", "isActive"],
+      properties: {
+        noticeId: { bsonType: "number" },
+        title: { bsonType: "string" },
+        content: { bsonType: "string" },
+        publishedDate: { bsonType: "date" },
+        isActive: { bsonType: "bool" }
+      }
+    }
+  }
+})
+
+
+college_db> show collections
+admission_enquiries
+admissions
+career_domains
+career_requests
+counselors
+courses
+event_registrations
+events
+notices
+students
+
