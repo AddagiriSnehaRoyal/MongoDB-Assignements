@@ -62,8 +62,3 @@ Schema validation used with:
 ### Indexing:
 - createIndex(), getIndexes(), dropIndex()
 
-### Backup:
-- mongodump used to create backup
-
-### Atlas:
-- MongoDB Compass connected to MongoDB Atlas cluster
