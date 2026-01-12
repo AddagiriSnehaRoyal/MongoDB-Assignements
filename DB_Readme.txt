@@ -62,3 +62,75 @@ Schema validation used with:
 ### Indexing:
 - createIndex(), getIndexes(), dropIndex()
 
+
+Operators Used:
+Comparison Operators:
+Used to compare values in queries.
+$eq → Matches equal values
+$gt → Greater than
+$lt → Less than
+$in → Matches values from a list
+
+Used for:
+Finding students by age (using dateOfBirth)
+Finding courses by fee range
+Filtering admissions by status
+
+Logical Operators:
+Used to combine multiple conditions.
+$and → All conditions must be true
+$or → Any one condition true
+$not → Negates a condition
+$nor → None of the conditions true
+
+Used for:
+Fetching students based on multiple rules
+Filtering admissions using combined logic
+
+Element Operators:
+$exists → Checks whether a field is present
+Used to find documents where optional fields like description exist.
+
+$type → Checks BSON data type
+Used to confirm fields like dateOfBirth are stored as Date type.
+
+Evaluation Operators:
+$regex → Pattern matching in text
+Used for searching names starting with specific letters.
+
+$expr → Compare fields inside the same document
+Used for advanced conditions like comparing fee values.
+
+Array Operators:
+$size → Finds arrays with specific length
+$all → Matches arrays containing all given values
+$elemMatch → Matches specific element inside array
+
+Used for:
+Querying students who have multiple skills in career requests.
+
+Aggregation Framework
+Aggregation was used to generate reports and analytics.
+$match → Filters documents
+$group → Groups data (like GROUP BY in SQL)
+$project → Selects specific fields
+$sort → Sorts output
+$skip → Skips records for pagination
+$limit → Limits number of records
+$unwind → Breaks array into individual documents
+
+Used for:
+Total admissions per course
+Career domain popularity
+Event registration counts
+Paginated student reports
+
+## Indexing
+createIndex()
+Used to improve query performance on frequently used fields like studentId.
+
+getIndexes()
+Used to view all existing indexes in a collection.
+
+dropIndex()
+Used to remove unnecessary indexes.
