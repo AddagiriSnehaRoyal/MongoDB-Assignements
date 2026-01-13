@@ -134,3 +134,117 @@ Used to view all existing indexes in a collection.
 
 dropIndex()
 Used to remove unnecessary indexes.
+
+### Backup
+Backup created using mongodump command
+
+### Atlas
+Connected MongoDB Compass to MongoDB Atlas cluster successfully
+
+## Backup and Restore – college_db
+
+### Backup Method Used
+MongoDB Database Tools (mongodump)
+
+### Description
+The above command creates a backup of the college_db database.
+A new folder named backup/college_db was created containing .bson files for each collection such as:
+- students.bson
+- courses.bson
+- admissions.bson
+- career_requests.bson
+- events.bson
+etc.
+
+### Evidence
+Screenshots attached in the screenshots folder:
+- mongodump success output
+- backup folder structure
+
+
+# Mini Project – Enhancement of college_db
+
+## Part A: Data Modeling and Validation
+
+### Referenced Fields
+The database uses referencing instead of embedding to avoid data duplication and improve flexibility.
+Examples:
+- students.studentId referenced in admissions, career_requests, event_registrations
+- courses.courseId referenced in admissions
+- events.eventId referenced in event_registrations
+
+Referencing allows independent updates and better scalability.
+
+### Schema Validation Review
+Schema validation includes:
+- Required fields using required[]
+- Enum validation using enum
+- Data type enforcement using bsonType
+- Minimum value checks using minimum
+
+Validation was demonstrated using a failed insert which returned:
+"Document failed validation"
+
+---
+
+## Part B: Advanced Aggregation
+
+### $lookup
+Used to join students with admissions to retrieve combined details.
+
+### $facet
+Used to generate multiple reports (by status and by course) in a single query.
+
+### $bucket
+Used to categorize courses based on fee ranges.
+
+### $group and $project
+Used to summarize data and format output reports.
+
+---
+
+## Part C: Query Optimization
+
+### explain()
+Used to analyze query performance.
+
+Before index:
+- Query used COLLSCAN (collection scan)
+
+After creating index on studentId:
+- Query used IXSCAN (index scan)
+- Performance improved
+
+Index was created because studentId is frequently used in filters.
+
+Part D: MongoDB Atlas and Administration
+
+MongoDB Atlas Setup and Verification
+1. Create a Free-Tier MongoDB Atlas Cluster
+Go to https://www.mongodb.com/atlas and sign up/login.
+Click Create → Deployment and select M0 Free Tier.
+Choose a cloud provider and region, then create the cluster.
+Create a database user (username & password).
+Go to Network Access → Add IP Address → Allow access from anywhere (0.0.0.0/0).
+This completes the cloud database setup.
+
+2. Connect college_db to Atlas using MongoDB Compass
+In Atlas, go to Cluster → Connect → Compass.
+Copy the connection string:
+mongodb+srv://username:<password>@cluster0.xxxxx.mongodb.net/
+Replace <password> with your actual password.
+Paste the string into MongoDB Compass and click Connect.
+Create a database named college_db
+Create collections such as:
+students
+courses
+admissions
+events
+career_requests
+event_registrations
+
+3. Verify Data Availability and Query Execution
+Check collections and data:
+Open college_db in MongoDB Compass
+Click any collection (e.g., students)
+View data under the Documents tab
